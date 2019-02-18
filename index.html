@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			html,body{
+				margin: 0;
+				height: 100%;
+			}
+			#uImg{
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				/*position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);*/
+				width:80%;
+				height: 80%;
+				color: #9FA7B1;
+				font-family: "微软雅黑";
+				font-size: 40px;
+				border: 2px dashed #D5D9DD;
+				text-align: center;
+				align-items:center; display: -webkit-flex;
+				justify-content:center; display: -webkit-flex;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<div id="uImg">
+			<span id="txt1">将你的图片拖拽到此处</span>
+		</div>
+		<script>
+			
+			var box=document.getElementById('uImg');
+			var text = document.getElementById("txt1");
+			box.ondragover=function (e){
+ 				e.preventDefault();
+ 				box.style.backgroundColor = "aliceblue";
+ 				box.style.borderColor = "#358EDF";
+ 				text.style.color = "#358EDF";
+			}
+			box.ondrop=function (e){
+				e.preventDefault();
+ 				var f=e.dataTransfer.files[0];
+ 				console.log(f);
+				var fr=new FileReader();
+ 				fr.readAsDataURL(f);
+ 				fr.onload=function (e){
+ 					
+  					console.log(e);
+  					
+  					var Url=this.result;
+  					box.innerHTML = '<img src="'+Url+'" alt="" id="newimg">';
+  					var nimg = document.getElementById("newimg");
+					var body = document.getElementsByTagName('body');
+					
+
+  					nimg.style.width = "100%";
+  					nimg.style.height = "100%";
+  					box.style.position = "static";
+  					box.style.width = "100%";
+  					box.style.height = "auto";
+  					box.style.border = "none";
+  					box.removeChild(document.getElementById("txt1"));
+  					
+ 				}
+			}
+	</script>
+	</body>
+</html>
